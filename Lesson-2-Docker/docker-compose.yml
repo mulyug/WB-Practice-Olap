@@ -1,0 +1,22 @@
+
+services:
+  clickhouse-server:
+    image: clickhouse/clickhouse-server
+    container_name: ch
+    restart: on-failure:3
+    cpus: "2.0"
+    mem_limit: 256m
+    ports:
+      - "8123:8123"
+    volumes:
+      - /var/lib/docker/volumes/ch_volume
+  superset:
+    image: apache/superset
+    container_name: superset
+    restart: unless-stopped
+    cpus: "2.0"
+    mem_limit: 512m
+    ports:
+      - "8088:8088"
+    volumes:
+      - /var/lib/docker/volumes/ss_volume

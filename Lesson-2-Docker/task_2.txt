@@ -1,0 +1,12 @@
+
+docker pull clickhouse/clickhouse-server
+docker run -d --name ch --cpus="2" -m 256m --restart=on-failure:3 -p 8123:8123 -v ch_volume:/data clickhouse/clickhouse-server
+docker restart ch
+docker stop ch
+docker rm ch
+
+docker pull apache/superset
+docker run -d --name superset --cpus="2" -m 512m --restart=unless-stopped -p 8088:8088 -v ss_volume:/data apache/superset
+docker restart superset
+docker stop superset
+docker rm superset
